@@ -1,10 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
 import CardList from "../components/CardList";
 import { robots } from "../Robots.js";
 import SearchBox from "../SearchBox";
 import "../index.css";
 import "../App.css";
 import Scroll from "../components/Scroll.js";
+import { setSearchField } from "../actions.js";
+
+const mapStateToProps = state => {
+  return {
+    searchField: state.searchField
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSearchChange: event => dispatch(setSearchField(event.target.value))
+  };
+};
 
 class App extends React.Component {
   state = {
@@ -15,6 +29,7 @@ class App extends React.Component {
     this.setState({ searchfield: event.target.value });
   };
 
+  componentDidMount() {}
   //   selectedRobots = () => {
   //     return robots.filter(robot =>
   //       robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase())
@@ -36,4 +51,7 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
