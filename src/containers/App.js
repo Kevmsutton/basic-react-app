@@ -6,6 +6,7 @@ import SearchBox from "../SearchBox";
 import "../index.css";
 import "../App.css";
 import Scroll from "../components/Scroll.js";
+import ErrorBoundry from "../components/ErrorBoundry.js";
 import { setSearchField } from "../actions.js";
 
 const mapStateToProps = state => {
@@ -40,7 +41,9 @@ class App extends React.Component {
         <h1 className="f1"> Robofriends</h1>
         <SearchBox onSearchChange={onSearchChange} />
         <Scroll>
-          <CardList robots={selectedRobots} />;
+          <ErrorBoundry>
+            <CardList robots={selectedRobots} />
+          </ErrorBoundry>
         </Scroll>
       </div>
     );
