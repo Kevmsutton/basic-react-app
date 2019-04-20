@@ -21,13 +21,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 class App extends React.Component {
-  state = {
-    searchfield: ""
-  };
-
-  onSearchChange = event => {
-    this.setState({ searchfield: event.target.value });
-  };
+  state = {};
 
   componentDidMount() {}
   //   selectedRobots = () => {
@@ -37,13 +31,14 @@ class App extends React.Component {
   //   };
 
   render() {
+    const { searchField, onSearchChange } = this.props;
     const selectedRobots = robots.filter(robot =>
-      robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase())
+      robot.name.toLowerCase().includes(searchField.toLowerCase())
     );
     return (
       <div className="pa2 tc">
         <h1 className="f1"> Robofriends</h1>
-        <SearchBox onSearchChange={this.onSearchChange} />
+        <SearchBox onSearchChange={onSearchChange} />
         <Scroll>
           <CardList robots={selectedRobots} />;
         </Scroll>
